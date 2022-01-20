@@ -1,0 +1,37 @@
+---
+title: "exploring"
+author: "Shafayet Shariar Hossain"
+date: "1/20/2022"
+output: html_document
+---
+
+
+
+*italic*
+**bold**
+
+_italic_
+__bold__
+
+
+***italic and bold***
+
+1. first
+2. second
+
+- first
+  - second
+  
+  
+  
+```{r}
+library(tibble)
+mtcars_tbl <- as_tibble(mtcars, rownames = "model")
+
+#mtcars
+mtcars_tbl
+
+knitr::kable(mtcars_tbl)
+
+```
+
