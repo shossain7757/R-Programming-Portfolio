@@ -8,17 +8,36 @@ I am Shafayet Shariar Hossain and I am a PhD student at the Big Data Analytics P
 
 # Navigation 
 
-The repository is divided into different folders. Each folder is a different deliverable for this course.The folders are as follows
+The repository is divided into different folders and subfolders. The "*getting_started*" folder involves all the *in class* activities of this course.Rest of the folders and subfolders contains all the deliverables. For ease of navigation, the dropdown below can be clicked and directly accessed to the desired deliverable. 
 
 <details>
 <summary> getting_started </summary>
 </details>
+
 <details>
 <summary> Lab </summary>
   - [Lab 1](https://github.com/shossain7757/progdata-class/tree/main/Lab/Lab%2001)
   - Lab 2
   - Lab 3
 </details>
+
 <details>
 <summary>Portfolio Pieces</summary>
+ - Personal Website
+ - R Shiny
 </details>
+
+<details>
+<summary> Presentation </summary>
+ - Presentation Slide
+</details>
+
+# Code Completion Status
+
+|**Item**|**Status**|
+|:---:   |:---:     |
+| Lab 1  |**Done**  |
+| Lab 2  |          |
+| Lab 3  |          |
+
+
