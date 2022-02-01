@@ -16,15 +16,19 @@ The repository is divided into different folders and subfolders. The "*getting_s
 
 <details>
 <summary> Lab </summary>
-  * <a href="https://github.com/shossain7757/progdata-class/tree/main/Lab/Lab%2001">Lab 1</a>
-  * Lab 2
-  * Lab 3
+<ol>
+  <li><a href="https://github.com/shossain7757/progdata-class/tree/main/Lab/Lab%2001">Lab 1</a></li>
+  <li>Lab 2</li>
+  <li>Lab 3</li>
+</ol>
 </details>
 
 <details>
 <summary>Portfolio Pieces</summary>
- - Personal Website
- - R Shiny
+<ol>
+ <li>Personal Website</li>
+ <li>R Shiny</li>
+</ol>
 </details>
 
 <details>
