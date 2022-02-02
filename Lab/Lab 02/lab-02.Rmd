@@ -59,72 +59,130 @@ ggplot(data = plastic_waste) +
 
 ```
 
-### Exercise 3
+### Exercise 1.3
 
 Remove this text, and add your answer for Exercise 3 here.
 
-### Exercise 4
+
+
+### Exercise 2.1
 
 Remove this text, and add your answer for Exercise 4 here.
 
 ```{r plastic-waste-violin}
-# insert code here
+
+ggplot(data = plastic_waste) +
+  aes(y = plastic_waste_per_cap, x = continent, fill = continent) + 
+  geom_boxplot(na.rm = TRUE, alpha = 0.5)
+  
 ```
 
-### Exercise 5
+### Exercise 2.2
 
 Remove this text, and add your answer for Exercise 5 here.
 
 ```{r plastic-waste-mismanaged}
-# insert code here
+
+ggplot(data = plastic_waste) +
+  aes(y = plastic_waste_per_cap, x = continent, fill = continent, color = continent) + 
+  geom_jitter(height = 0.2, width = 0.2, na.rm = TRUE) +
+  geom_boxplot(na.rm = TRUE, alpha = 0.5) +
+  ylim(0,1)
+
 ```
 
-### Exercise 6
+### Exercise 2.3
 
 Remove this text, and add your answer for Exercise 6 here.
 
 ```{r plastic-waste-mismanaged-continent}
-# insert code here
+
+ggplot(data = plastic_waste) +
+  aes(x = plastic_waste_per_cap, y = continent, fill = continent, color = continent) + 
+  geom_jitter(height = 0.2, width = 0.2, na.rm = TRUE) +
+  geom_boxplot(na.rm = TRUE, alpha = 0.5, width = 0.5, color = 'black') +
+  ggdist::stat_slab(na.rm = TRUE, position = position_nudge(y = 0.2),
+                    alpha = 0.5, size = 0.1, height = 0.5) +
+  xlim(0,1)
+
 ```
 
-### Exercise 7
+### Exercise 2.4
 
 Remove this text, and add your answer for Exercise 7 here.
 
-```{r plastic-waste-population-total}
-# insert code here
+
+### Exercise 3.1
+
+```{r relationship between plastic waste per capita and mismanaged plastic waste per capita}
+
+ggplot(data = plastic_waste) +
+  aes(x = mismanaged_plastic_waste_per_cap, y = plastic_waste_per_cap) + 
+  geom_point(na.rm = TRUE) +
+  ylim(0,1)
+
 ```
 
-```{r plastic-waste-population-coastal}
-# insert code here
+### Exercise 3.2
+
+```{r Color the points in the scatterplot by continent}
+
+
+ggplot(data = plastic_waste) +
+  aes(x = mismanaged_plastic_waste_per_cap, y = plastic_waste_per_cap, color = continent) + 
+  geom_point(na.rm = TRUE) +
+  ylim(0,1)
 ```
 
-### Exercise 8
+
+### Exercise 3.3
+
+```{r Relationship between plastic waste per capita and total population}
+
+ggplot(data = plastic_waste) +
+  aes(x = total_pop, y = plastic_waste_per_cap) +
+  geom_point(na.rm = TRUE) +
+  scale_x_continuous(trans = 'log10', labels = scales::comma_format()) +
+  ylim(0,1)+
+  geom_smooth(na.rm = TRUE)
+
+
+```
+
+
+```{r Relationship between plastic waste per capita and coastal population}
+
+ggplot(data = plastic_waste) +
+  aes(x = coastal_pop, y = plastic_waste_per_cap) +
+  geom_point(na.rm = TRUE) +
+  scale_x_continuous(trans = 'log10', labels = scales::comma_format()) +
+  ylim(0,1)+
+  geom_smooth(na.rm = TRUE)
+
+```
+
+
+
+### Exercise 4
 
 Remove this text, and add your answer for Exercise 8 here.
 
 ```{r recreate-viz}
-# insert code here
+new_plastic_waste <- plastic_waste %>% 
+  drop_na() %>% 
+  mutate(Coastal_pop_proportion = coastal_pop/total_pop)
+
+ggplot(new_plastic_waste) +
+  aes(x = Coastal_pop_proportion, y = plastic_waste_per_cap) +
+  geom_point(na.rm = TRUE, size = 1.5, aes(color = continent)) +
+  geom_smooth(na.rm = TRUE, color = 'black') +
+  ylim(0,0.75) +
+  xlab('Coastal population proportion (Coastal / total population)') +
+  ylab('Plastic waste per capita') +
+  labs(title = 'Plastic waste vs. coastal population proportion',
+       subtitle = 'by continent') +
+  scale_color_discrete('Continent')
+  
+
 ```
-
-## Pro-Tips
-
-### Excercise 3
-
-Try this :D
-
-```
-ggplot(data = plastic_waste, 
-       mapping = aes(x = continent, 
-                     y = plastic_waste_per_cap)) +
-  geom_violin()+
-  geom_boxplot(width=.3, fill="green") +
-  stat_summary(fun.y=median, geom="point") 
-```
-
-### Exercise 5 
-
-Helpful reference:http://www.sthda.com/english/wiki/ggplot2-themes-and-background-colors-the-3-elements
-
-
 
