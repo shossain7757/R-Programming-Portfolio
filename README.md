@@ -18,7 +18,7 @@ The repository is divided into different folders and subfolders. The "*getting_s
 <summary> Lab </summary>
 <ol>
   <li><a href="https://github.com/shossain7757/progdata-class/tree/main/Lab/Lab%2001">Lab 1</a></li>
-  <li><a href="https://github.com/shossain7757/progdata-class/tree/main/Lab/Lab%2002">Lab 1</a></li>
+  <li><a href="https://github.com/shossain7757/progdata-class/tree/main/Lab/Lab%2002">Lab 2</a></li>
   <li>Lab 3</li>
 </ol>
 </details>
