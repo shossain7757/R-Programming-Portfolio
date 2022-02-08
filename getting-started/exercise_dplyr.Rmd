@@ -201,13 +201,14 @@ Then, `mutate()` or `summarize()` will be performed for each matching column.
 Let's use `across()` to rescale the personality scores in `psych::bfi` to be on a 0-100 scale instead of a 1-6 scale.
 
 ```{r}
-psych::bfi |>
-  as_tibble(rownames = ".id") |> 
-  mutate(across(
-    A1:O5, 
+psych::bfi %>% 
+  as_tibble(rownames = ".id") %>%  
+  mutate(across(A1:O5, 
     \(x) (x - min(x, na.rm = TRUE)) / (max(x, na.rm = TRUE) - min(x, na.rm = TRUE)) * 100
   ))
 ```
+
+
 
 Now, let's use `across()` to **mean center** all of the numeric variables in gapminder:
 
