@@ -14,12 +14,23 @@ library(tidyverse)
 ```{r load-data, message=FALSE}
 plastic_waste <- read.csv(here::here("data/plastic-waste.csv"))
 ```
+## Warm up
+
+The data cell with NA value means that those data cells have missing values.
 
 ## Exercises
 
+```{r}
+plastic_waste |>
+  filter(plastic_waste_per_cap > 3.5)
+```
+
+The above code keeps the rows which have plastic_waste_per_cap > 3.5 data in them. Yes, I did expect this result as it matches with the filtered condition.
+
+
 ### Exercise 1.1
 
-Remove this text, and add your answer for Exercise 1 here.
+
 
 ```{r plastic-waste-continent}
 
@@ -41,35 +52,36 @@ ggplot(data = plastic_waste) +
   facet_wrap(~ continent, nrow = 2)
 ```
 
+In terms of plastic waste per capita by continent we can observe that for all continents it is a skewed distribution where most of the countries have lower values and few have extreme values. Also in all of the graphs there are two peaks which shows that distribution might be bi-modal. 
+
 ### Exercise 1.2
 
-```{r plastic-waste-density}
+```{r}
 
 ggplot(data = plastic_waste) +
   aes(x = plastic_waste_per_cap, color = continent) + 
-  geom_density(na.rm = TRUE)+
-  facet_wrap(~ continent, nrow = 2)
+  geom_density(na.rm = TRUE)
+  
 
 
 ggplot(data = plastic_waste) +
   aes(x = plastic_waste_per_cap, color = continent, fill = continent) + 
-  geom_density(na.rm = TRUE, alpha = 0.5)+
-  facet_wrap(~ continent, nrow = 2)
+  geom_density(na.rm = TRUE, alpha = 0.1)
 
 
 ```
 
 ### Exercise 1.3
 
-Remove this text, and add your answer for Exercise 3 here.
+We defined the color and fill of the curves by mapping aesthetics with aes() but defined the alpha level directly in the geom because we wanted different density curve for each continent. For that reason, we put that in the aes(). However, We put alpha in geom_density() so that we can have the same transparency for all the continent. 
 
 
 
 ### Exercise 2.1
 
-Remove this text, and add your answer for Exercise 4 here.
 
-```{r plastic-waste-violin}
+
+```{r}
 
 ggplot(data = plastic_waste) +
   aes(y = plastic_waste_per_cap, x = continent, fill = continent) + 
@@ -79,9 +91,9 @@ ggplot(data = plastic_waste) +
 
 ### Exercise 2.2
 
-Remove this text, and add your answer for Exercise 5 here.
 
-```{r plastic-waste-mismanaged}
+
+```{r}
 
 ggplot(data = plastic_waste) +
   aes(y = plastic_waste_per_cap, x = continent, fill = continent, color = continent) + 
@@ -91,11 +103,13 @@ ggplot(data = plastic_waste) +
 
 ```
 
+
+
 ### Exercise 2.3
 
-Remove this text, and add your answer for Exercise 6 here.
 
-```{r plastic-waste-mismanaged-continent}
+
+```{r rainbow plot}
 
 ggplot(data = plastic_waste) +
   aes(x = plastic_waste_per_cap, y = continent, fill = continent, color = continent) + 
@@ -109,7 +123,7 @@ ggplot(data = plastic_waste) +
 
 ### Exercise 2.4
 
-Remove this text, and add your answer for Exercise 7 here.
+The box plot only shows the min, 25th percentile, 50th percentile, 75th percentile and maximum whereas the points and density plots shows how those values are distributed and provides additional information on plastic waste per capita across continents.
 
 
 ### Exercise 3.1
@@ -123,6 +137,8 @@ ggplot(data = plastic_waste) +
 
 ```
 
+The relation between plastic waste per capita and mismanaged plastic waste per capita doesn't have a specific pattern. Most of the data points are clustered at the lower values of each variable. We can generally conclude that more mismanaged plastic waste per capita doesn't end in more plastic waste per capita. 
+
 ### Exercise 3.2
 
 ```{r Color the points in the scatterplot by continent}
@@ -133,6 +149,9 @@ ggplot(data = plastic_waste) +
   geom_point(na.rm = TRUE) +
   ylim(0,1)
 ```
+
+There seems to be no clear pattern between continents with respect to how plastic waste per capita and mismanaged plastic waste per capita are associated
+
 
 
 ### Exercise 3.3
@@ -161,11 +180,10 @@ ggplot(data = plastic_waste) +
 
 ```
 
-
+From both of these graphs we can observe neither of these variables have linear relationship between them. Both of these graphs do have some curve linear pattern. But the increase or decrease of the population or coastal population has no association with plastic waste per capita.
 
 ### Exercise 4
 
-Remove this text, and add your answer for Exercise 8 here.
 
 ```{r recreate-viz}
 new_plastic_waste <- plastic_waste %>% 

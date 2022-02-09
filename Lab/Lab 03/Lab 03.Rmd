@@ -18,7 +18,7 @@ library(gapminder)
 ### Exercise 1.1
 
 
-```{r filter gapminder to 3 countries in the 1970's}
+```{r filter gapminder to 3 countries in the 1970s}
 
 filter(gapminder, country %in% c('Bangladesh','France','United States') & year %in% c(1970:1979))
 
@@ -42,7 +42,7 @@ gapminder |>
 
 
 new_gapminder <- gapminder |> 
-  arrange(year) |> 
+  arrange(year) |>
   group_by(country) |> 
   mutate(lifeExp_change = lifeExp - lag(lifeExp)) |> 
   filter(lifeExp_change < 0)
@@ -82,7 +82,7 @@ ggplot(gapminder |>
 ### Exercise 2.1
 
 
-```{r a summary table of descriptive statistics for two quantative variables}
+```{r a summary table of descriptive statistics for two quantitative variables}
 
 # I have chosen the gapminder data set. And the chosen variables are
 # lifeExp & population
@@ -90,83 +90,75 @@ ggplot(gapminder |>
 
 gapminder |>
   summarize(
-    across(lifeExp,pop,
+    across(c(lifeExp,pop),
            list(
              mean = \(x) mean(x),
-             median = \(x) median(x)
-           ))
+             median = \(x) median(x),
+             sd = \(x) sd(x)
+           )) 
   )
+```
+
+```{r a scatterplot of lifeExp and pop variables using ggplot()}
+
+ggplot(gapminder |>
+         select(lifeExp,pop)) +
+  aes(x = pop, y = lifeExp)+
+  geom_point()+
+  scale_x_continuous(trans = 'log10', labels = scales::comma_format())
+
 
 
 ```
 
 ### Exercise 2.2
 
-Remove this text, and add your answer for Exercise 5 here.
 
-```{r plastic-waste-mismanaged}
+```{r a summary table giving the sample size and descriptive statistics for the quantitative variable by group.}
 
+# I have chosen the gapminder data set. And the chosen variables are
+# lifeExp & country
 
-
-```
-
-### Exercise 2.3
-
-Remove this text, and add your answer for Exercise 6 here.
-
-```{r plastic-waste-mismanaged-continent}
-
-
-
-```
-
-### Exercise 2.4
-
-
-
-
-### Exercise 3.1
-
-```{r relationship between plastic waste per capita and mismanaged plastic waste per capita}
-
-
-
-```
-
-### Exercise 3.2
-
-```{r Color the points in the scatterplot by continent}
-
-
+gapminder |>
+  group_by(country) |>
+  summarize(count = n(),
+            lifeExp_mean = mean(lifeExp),
+            lifeExp_median = median(lifeExp),
+            lifeExp_sd = sd(lifeExp)
+  )
 
 ```
 
 
-### Exercise 3.3
+```{r Raincloud Plot}
 
-```{r }
-
-
-
-
-```
-
-
-```{r }
-
-
-
-```
-
-
-
-### Exercise 4
-
-Remove this text, and add your answer for Exercise 8 here.
-
-```{r recreate-viz}
-
+ggplot(gapminder |>
+         filter(country %in% c('United States','China','Germany'))) +
+  aes(x = lifeExp, y = country) + 
+  geom_jitter(height = 0.2, width = 0.5) +
+  geom_boxplot(alpha = 0.3, width = 0.3) +
+  ggdist::stat_slab(position = position_nudge(y = 0.3),
+                    alpha = 0.5, size = 0.1, height = 0.5) 
   
+
+```
+
+### Bonus
+
+
+
+```{r}
+
+filter(gapminder, country == c("Rwanda", "Afghanistan"))
+
+```
+
+From the tibble above we find 12 rows of data. However, we know for a fact that our tibble should have 24 rows of data (12 for each country). Therefore, the code above didn't work. The reason being that when R is evaluating the relation country == c("Rwanda", "Afghanistan") it is evaluating 1st element of country with the 1st element of our given vector. In this case Rwanda and for that reason we do not have the 1st actual row of Afghanistan. The second value of the country vector is Afghanistan which is matched with the second element of our given vector Afghanistan. Therefore, we have that in our tibble. Similarly, the rest of the elements in the country vector gets matched with our given vector. This is how we lost half the elements of each country. 
+
+The correct way to do would be the following
+
+```{r}
+filter(gapminder, country %in% c("Rwanda", "Afghanistan"))
 
 ```
 
