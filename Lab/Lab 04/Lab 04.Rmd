@@ -1,0 +1,37 @@
+---
+title: "Lab 04 Personality and green reputation"
+author: "Shafayet Shariar Hossain"
+date: "2/10/2022"
+output: html_document
+---
+
+## Load packages and data
+
+```{r setup, message=FALSE}
+library(tidyverse)
+library(gapminder)
+
+dictionary <- readr::read_csv(here::here("data", "green_dictionary.csv"))
+green_data <- readr::read_csv(here::here("data", "green_data.csv"))
+
+
+```
+
+
+
+
+
+## Exercises
+
+### Exercise 1.1
+
+
+```{r}
+
+
+
+ggplot(green_data)+
+  aes(x = id, y = green1)+
+  geom_point(na.rm= TRUE)
+```
+
