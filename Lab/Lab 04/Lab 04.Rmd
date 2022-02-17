@@ -10,6 +10,7 @@ output: html_document
 ```{r setup, message=FALSE}
 library(tidyverse)
 library(gapminder)
+library(reshape2)
 
 dictionary <- readr::read_csv(here::here("data", "green_dictionary.csv"))
 green_data <- readr::read_csv(here::here("data", "green_data.csv"))
@@ -26,12 +27,47 @@ green_data <- readr::read_csv(here::here("data", "green_data.csv"))
 ### Exercise 1.1
 
 
-```{r}
+```{r Inspect the item responses (e.g., with graphs or by summarizing distinct values).}
 
+ggplot(melt(green_data))+
+  aes(x = value)+
+  facet_wrap(~variable, scales = 'free_x')+
+  geom_histogram(na.rm = TRUE)
 
+green_data|>
+  select(-id)|>
+  unlist()|>
+  unique()
 
-ggplot(green_data)+
-  aes(x = id, y = green1)+
-  geom_point(na.rm= TRUE)
 ```
 
+From the plot and unique values of the data frame it can be observed that many of the variables have both NA and -99 as missing values. Therefore, we need to recode -99 as missing value.
+
+
+```{r}
+
+# Recoding -99 as the missing value
+
+green_data <- green_data |>
+  mutate_at(vars(-id), list(~recode(.,'1'=1,'2'=2,'3'=3,'4'=4,'5'=5, .default = NA_real_)))
+
+green_data|>
+  select(-id)|>
+  unlist()|>
+  unique()
+
+
+```
+
+Now it can be observed that the missing values are only coded as NA.
+
+```{r Reverse coding the columns which have -1 value in the keying column of the dictionary file}
+
+recoded_green_data <- green_data |>
+                      mutate_at(dictionary |> 
+                                filter(Keying == -1) |> 
+                                select(Item) |>
+                                pull(),
+                                list(~recode(.,'1'=5,'2'=4,'4'=2,'5'=1)))
+                                
+```

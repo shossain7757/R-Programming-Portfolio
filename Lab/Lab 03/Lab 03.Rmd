@@ -45,7 +45,8 @@ new_gapminder <- gapminder |>
   arrange(year) |>
   group_by(country) |> 
   mutate(lifeExp_change = lifeExp - lag(lifeExp)) |> 
-  filter(lifeExp_change < 0)
+  filter(lifeExp_change < 0) |>
+  ungroup()
 
 new_gapminder
 
@@ -57,7 +58,8 @@ new_gapminder
 
 gapminder |> 
   group_by(country) |> 
-  filter(gdpPercap == max(gdpPercap))
+  filter(gdpPercap == max(gdpPercap)) |>
+  ungroup()
 
 
 ```
