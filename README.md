@@ -41,7 +41,7 @@ The repository is divided into different folders and subfolders. The "*getting_s
 |**Item**|**Status**|
 |:---:   |:---:     |
 | Lab 1  |:thumbsup:|
-| Lab 2  |          |
-| Lab 3  |          |
+| Lab 2  |:thumbsup:|
+| Lab 3  |:thumbsup:|
 
 
