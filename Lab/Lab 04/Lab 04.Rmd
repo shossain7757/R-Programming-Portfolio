@@ -11,6 +11,7 @@ output: html_document
 library(tidyverse)
 library(gapminder)
 library(reshape2)
+library(gridExtra)
 
 dictionary <- readr::read_csv(here::here("data", "green_dictionary.csv"))
 green_data <- readr::read_csv(here::here("data", "green_data.csv"))
@@ -24,7 +25,7 @@ green_data <- readr::read_csv(here::here("data", "green_data.csv"))
 
 ## Exercises
 
-### Exercise 1.1
+### Exercise 1
 
 
 ```{r Inspect the item responses (e.g., with graphs or by summarizing distinct values).}
@@ -61,9 +62,11 @@ green_data|>
 
 Now it can be observed that the missing values are only coded as NA.
 
-```{r Reverse coding the columns which have -1 value in the keying column of the dictionary file}
+```{r}
 
-recoded_green_data <- green_data |>
+# Reverse coding the columns which have -1 value in the keying column of the dictionary file
+
+new_green_data <- green_data |>
                       mutate_at(dictionary |> 
                                 filter(Keying == -1) |> 
                                 select(Item) |>
@@ -71,3 +74,141 @@ recoded_green_data <- green_data |>
                                 list(~recode(.,'1'=5,'2'=4,'4'=2,'5'=1)))
                                 
 ```
+
+### Exercise 2
+
+
+```{r}
+
+# Total scores of the four scales
+
+new_green_data <- new_green_data |>
+  drop_na()
+
+new_green_data <- new_green_data |>
+  rowwise() |>
+  mutate(
+    green_total = sum(c_across(starts_with('green')), na.rm = TRUE),
+    comp_total = sum(c_across(starts_with('comp')), na.rm = TRUE),
+    intel_total = sum(c_across(starts_with('intel')), na.rm = TRUE),
+    open_total = sum(c_across(starts_with('open')), na.rm = TRUE),
+    .before = green1,
+    
+  )|>
+  ungroup()
+
+
+```
+
+### Exercise 3
+
+
+```{r}
+# Rescale the variables from 0-100. Formula to calculate POMP= 100*(raw - min)/(max - min)
+
+pomp_function <- function(x){
+  round((x-min(x))/(max(x)-min(x))*100,2)
+}
+
+new_green_data <- new_green_data |>
+  mutate(
+    across(
+      c(green_total:open_total),
+      ~pomp_function(.x),
+      .names = '{.col}_pomp'
+    ),
+    .after = id
+  )
+
+
+```
+
+
+### Exercise 4
+
+
+```{r plots that illustrate the distributions of the 4 POMP-scored variables. }
+
+
+p <- ggplot(new_green_data)+
+  aes( x = green_total_pomp)+
+  geom_histogram(aes(y = ..density..), position = 'identity', binwidth = 15)+
+  geom_density(size = .6, aes(y = ..density..))
+
+q <- ggplot(new_green_data)+
+  aes( x = comp_total_pomp)+
+  geom_histogram(aes(y = ..density..), position = 'identity', binwidth = 10)+
+  geom_density(size = .6, aes(y = ..density..))
+
+
+r <- ggplot(new_green_data)+
+  aes( x = intel_total_pomp)+
+  geom_histogram(aes(y = ..density..), position = 'identity', binwidth = 12)+
+  geom_density(size = .6, aes(y = ..density..))
+
+s <- ggplot(new_green_data)+
+  aes( x = open_total_pomp)+
+  geom_histogram(aes(y = ..density..), position = 'identity', binwidth = 10)+
+  geom_density(size = .6, aes(y = ..density..))
+
+grid.arrange(p,q,r,s, nrow = 2)
+
+```
+
+
+### Exercise 5
+
+
+```{r scatterplots showing the relationships between green reputation and each personality trait. Include trend lines for students and non-students.}
+
+ggplot(new_green_data)+
+  aes(x = green_total_pomp, y = comp_total_pomp, color = factor(student))+
+  geom_point()+
+  geom_smooth()+
+  labs(title = 'Green Reputation vs Compassion')
+
+
+ggplot(new_green_data)+
+  aes(x = green_total_pomp, y = intel_total_pomp, color = factor(student))+
+  geom_point()+
+  geom_smooth()+
+  labs(title = 'Green Reputation vs Intelectual Curiosity')
+
+
+ggplot(new_green_data)+
+  aes(x = green_total_pomp, y = open_total_pomp, color = factor(student))+
+  geom_point()+
+  geom_smooth()+
+  labs(title = 'Green Reputation vs Openness to Experiences')
+
+```
+
+
+
+### Exercise 6
+
+
+```{r Raincloud plot}
+
+
+ggplot(new_green_data) +
+  aes(x = green_total_pomp, y = factor(student), fill = factor(student), color = factor(student)) + 
+  geom_jitter(height = 0.2, width = 0.2) +
+  geom_boxplot(alpha = 0.5, width = 0.3, color = 'black') +
+  ggdist::stat_slab(position = position_nudge(y = 0.2),
+                    alpha = 0.5, size = 0.1, height = 0.5)
+```
+
+
+
+### Exercise 7
+
+```{r}
+
+new_green_data|>
+  group_by(factor(student))|>
+  summarise(across(c(green_total,comp_total,intel_total,open_total), list(mean = mean, stddev = sd, median = median, min = min, max = max)))|>
+  as.data.frame()
+  
+```
+
