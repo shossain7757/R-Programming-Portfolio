@@ -183,7 +183,7 @@ ggplot(new_green_data)+
 
 ```
 
-
+From the above 3 scatterplot it can be observed that the relationship between green reputation and the 3 personality traits differ across the student status of the individuals. In green reputation vs compassion plot it can be observed that for both student and non-student individuals the trend line is similar. However, students have higher compassion score than non-students. In green reputation vs intellectual curiosity plot those who are students have a positive curve linear relationship which denotes that as green reputation score increase their intellectual curiosity also increases. For non-students not much definitive can be answered from the trend lines. Similar things can be said from the green reputation vs openness to experience plot. For students as green reputation score increases so does opennes to experiences. For non-students no pattern is apparent. 
 
 ### Exercise 6
 
