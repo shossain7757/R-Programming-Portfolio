@@ -1,0 +1,55 @@
+---
+title: "Lab 05A"
+author: "Shafayet Shariar Hossain"
+date: "2/23/2022"
+output: html_document
+---
+
+
+## Load packages and data
+
+```{r setup, message=FALSE}
+
+library(tidyverse)
+lotr  <- read_csv("https://raw.githubusercontent.com/jennybc/lotr-tidy/master/data/lotr_tidy.csv") |> 
+  rename(Species = Race)
+
+```
+
+
+## Exercises
+
+### Exercise 1
+
+
+I would say that the data is in tidy format as each row represents number of people of certain species and gender in one of the trilogies of lord of the rings. The layout of
+the data also machine readable.
+
+### Exercise 2
+
+
+```{r}
+
+(lotr_wide <- lotr |> 
+  pivot_wider(id_cols  = c(Film, Gender), 
+              names_from = Species, 
+              values_from = Words))
+
+
+```
+
+
+
+### Exercise 3
+
+
+```{r}
+
+lotr_wide |> 
+  pivot_longer(cols = -c(Film, Gender), 
+               names_to  = 'Species', 
+               values_to = 'Words')
+
+
+```
+

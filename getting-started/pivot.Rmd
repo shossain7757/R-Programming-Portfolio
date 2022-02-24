@@ -1,0 +1,52 @@
+---
+title: "Tidy_data"
+author: "Shafayet Shariar Hossain"
+date: "2/23/2022"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+
+haireye <- as_tibble(HairEyeColor) |> 
+  count(Hair, Eye, wt = n) |> 
+  rename(hair = Hair, eye = Eye)
+
+```
+
+```{r}
+
+haireye |>
+  mutate(eye = str_c(eye, "_eyed"))|>
+  pivot_wider(id_cols = hair, names_from = eye, values_from = n)
+```
+
+```{r}
+
+haireye_untidy <- haireye |>
+  mutate(eye = str_c(eye, "_eyed"))|>
+  pivot_wider(id_cols = hair, names_from = eye, values_from = n)
+
+
+```
+
+
+
+```{r}
+haireye_tidy <- haireye_untidy |>
+  pivot_longer(cols = c(names(haireye_untidy)[2:5]),
+               names_to = 'eye',
+               values_to = 'n')
+```
+
+
+```{r}
+
+haireye |> 
+  pivot_wider(id_cols     = hair, 
+              names_from  = eye, 
+              values_from = n)
+
+
+```
+
