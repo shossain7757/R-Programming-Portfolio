@@ -1,0 +1,33 @@
+---
+title: "Lab 06: Join those tables!"
+author: "Shafayet Shariar Hossain"
+date: "3/1/2022"
+output: html_document
+---
+
+## Load packages and data
+
+```{r setup, message=FALSE}
+
+library(tidyverse)
+
+```
+
+
+## Exercises
+
+### Exercise 1
+
+```{r}
+songs <- read_csv("https://raw.githubusercontent.com/bwiernik/progdata-class/master/data/singer/songs.csv")
+locations <- read_csv("https://raw.githubusercontent.com/bwiernik/progdata-class/master/data/singer/loc.csv")
+
+(time <- as_tibble(songs) |> 
+   rename(song = title))
+
+(album <- as_tibble(locations) |> 
+   select(title, everything()) |> 
+   rename(album = release,
+          song  = title))
+```
+

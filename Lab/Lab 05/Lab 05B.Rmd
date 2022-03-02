@@ -1,0 +1,90 @@
+---
+title: "Lab 05B"
+author: "Shafayet Shariar Hossain"
+date: "2/24/2022"
+output: html_document
+---
+
+## Load Packages & Data
+
+```{r setup, message = FALSE}
+
+library(tidyverse)
+set.seed(123)
+missing_w2_parent <- sample(1:500, 30)
+missing_w2_child <- c(missing_w2_parent[1:5], sample(1:500, 25))
+family  <- read_csv(
+  "https://raw.githubusercontent.com/bwiernik/progdata/main/inst/tutorials/data/family_data.csv"
+) |> 
+  mutate(
+    across(
+      starts_with("w2") & contains("parent"),
+      ~ ifelse(family_id %in% missing_w2_parent, NA_real_, .x)
+    ),
+    across(
+      starts_with("w2") & contains("child"),
+      ~ ifelse(family_id %in% missing_w2_child, NA_real_, .x)
+    )
+  )
+
+```
+
+
+
+## Exercises
+
+### Exercise 1
+
+
+```{r Reshape the dataset to a “longer” format}
+
+family_longest <- family |> 
+  pivot_longer( cols = -family_id,
+                names_to = c('wave','scale','family_member'),
+                names_sep = '_',
+                values_to = 'score')
+
+
+print(family_longest)
+```
+
+
+### Exercise 2
+
+```{r}
+
+family_long <- family |> 
+  pivot_longer(
+    cols = -family_id,
+    names_to = c("wave",".value", "family_member"), 
+    names_sep = "_", 
+    values_drop_na = TRUE
+  )
+  
+print(family_long)
+  
+```
+
+
+### Exercise 3
+
+```{r families that are missing wave 2 data for at least one person}
+
+
+families_with_missing_values <- family_longest |>
+  filter(wave == 'w2')|>
+  group_by(family_id)|>
+  summarise(missing_scores = sum(is.na(score)))|>
+  filter(missing_scores >= 1)|>
+  select(family_id)|>
+  pull()
+
+
+print(families_with_missing_values)
+
+
+```
+
+It is easier to find missing values in the long format as each row represents one individual. 
+
+

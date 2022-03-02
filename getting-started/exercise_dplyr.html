@@ -402,27 +402,69 @@ select(gapminder, Continent = continent)</code></pre>
 <ol style="list-style-type: decimal">
 <li>Only keep data with population greater than 100 million.</li>
 </ol>
-<pre class="r"><code>gapminder |&gt;
-  filter(FILL_THIS_IN)</code></pre>
-<pre><code>## Error: Problem with `filter()` input `..1`.
-## i Input `..1` is `FILL_THIS_IN`.
-## x object &#39;FILL_THIS_IN&#39; not found</code></pre>
+<pre class="r"><code>gapminder %&gt;% 
+  filter(pop &gt; 100000000)</code></pre>
+<pre><code>## # A tibble: 77 x 6
+##    country    continent  year lifeExp       pop gdpPercap
+##    &lt;fct&gt;      &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
+##  1 Bangladesh Asia       1987    52.8 103764241      752.
+##  2 Bangladesh Asia       1992    56.0 113704579      838.
+##  3 Bangladesh Asia       1997    59.4 123315288      973.
+##  4 Bangladesh Asia       2002    62.0 135656790     1136.
+##  5 Bangladesh Asia       2007    64.1 150448339     1391.
+##  6 Brazil     Americas   1972    59.5 100840058     4986.
+##  7 Brazil     Americas   1977    61.5 114313951     6660.
+##  8 Brazil     Americas   1982    63.3 128962939     7031.
+##  9 Brazil     Americas   1987    65.2 142938076     7807.
+## 10 Brazil     Americas   1992    67.1 155975974     6950.
+## # ... with 67 more rows</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Only keep data <em>from Asia</em> with population greater than 100 million.</li>
 </ol>
-<pre class="r"><code>gapminder |&gt;
-  filter(FILL_THIS_IN)</code></pre>
-<pre><code>## Error: Problem with `filter()` input `..1`.
-## i Input `..1` is `FILL_THIS_IN`.
-## x object &#39;FILL_THIS_IN&#39; not found</code></pre>
+<pre class="r"><code>gapminder %&gt;% 
+  filter(pop &gt; 100000000 &amp; continent == &#39;Asia&#39;)</code></pre>
+<pre><code>## # A tibble: 52 x 6
+##    country    continent  year lifeExp       pop gdpPercap
+##    &lt;fct&gt;      &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
+##  1 Bangladesh Asia       1987    52.8 103764241      752.
+##  2 Bangladesh Asia       1992    56.0 113704579      838.
+##  3 Bangladesh Asia       1997    59.4 123315288      973.
+##  4 Bangladesh Asia       2002    62.0 135656790     1136.
+##  5 Bangladesh Asia       2007    64.1 150448339     1391.
+##  6 China      Asia       1952    44   556263527      400.
+##  7 China      Asia       1957    50.5 637408000      576.
+##  8 China      Asia       1962    44.5 665770000      488.
+##  9 China      Asia       1967    58.4 754550000      613.
+## 10 China      Asia       1972    63.1 862030000      677.
+## # ... with 42 more rows</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Only keep data <em>from the countries Brazil and China</em> with population greater than 100 million.</li>
 </ol>
-<pre class="r"><code>gapminder |&gt;
-  filter(FILL_THIS_IN)</code></pre>
-<pre><code>## Error: Problem with `filter()` input `..1`.
-## i Input `..1` is `FILL_THIS_IN`.
-## x object &#39;FILL_THIS_IN&#39; not found</code></pre>
+<pre class="r"><code>gapminder %&gt;% 
+  filter(country %in% c(&#39;Brazil&#39;,&#39;China&#39;) &amp; pop &gt; 100000000)</code></pre>
+<pre><code>## # A tibble: 20 x 6
+##    country continent  year lifeExp        pop gdpPercap
+##    &lt;fct&gt;   &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;      &lt;int&gt;     &lt;dbl&gt;
+##  1 Brazil  Americas   1972    59.5  100840058     4986.
+##  2 Brazil  Americas   1977    61.5  114313951     6660.
+##  3 Brazil  Americas   1982    63.3  128962939     7031.
+##  4 Brazil  Americas   1987    65.2  142938076     7807.
+##  5 Brazil  Americas   1992    67.1  155975974     6950.
+##  6 Brazil  Americas   1997    69.4  168546719     7958.
+##  7 Brazil  Americas   2002    71.0  179914212     8131.
+##  8 Brazil  Americas   2007    72.4  190010647     9066.
+##  9 China   Asia       1952    44    556263527      400.
+## 10 China   Asia       1957    50.5  637408000      576.
+## 11 China   Asia       1962    44.5  665770000      488.
+## 12 China   Asia       1967    58.4  754550000      613.
+## 13 China   Asia       1972    63.1  862030000      677.
+## 14 China   Asia       1977    64.0  943455000      741.
+## 15 China   Asia       1982    65.5 1000281000      962.
+## 16 China   Asia       1987    67.3 1084035000     1379.
+## 17 China   Asia       1992    68.7 1164970000     1656.
+## 18 China   Asia       1997    70.4 1230075000     2289.
+## 19 China   Asia       2002    72.0 1280400000     3119.
+## 20 China   Asia       2007    73.0 1318683096     4959.</code></pre>
 </div>
 <div id="mutate" class="section level2">
 <h2><code>mutate()</code></h2>
@@ -434,25 +476,62 @@ select(gapminder, Continent = continent)</code></pre>
 <li><code>grossGDP</code>: Multiplying GPD per capita by population</li>
 <li><code>gdpBill</code>: GDP in billions, rounded to two decimals.</li>
 </ul>
-<pre class="r"><code>gapminder |&gt;
-  mutate(FILL_THIS_IN)</code></pre>
-<pre><code>## Error: Problem with `mutate()` input `..1`.
-## i `..1 = FILL_THIS_IN`.
-## x object &#39;FILL_THIS_IN&#39; not found</code></pre>
+<pre class="r"><code>gapminder %&gt;% 
+  mutate(grossGDP = gdpPercap * pop,
+         gdpBill = round(grossGDP / 1000000000, 2))</code></pre>
+<pre><code>## # A tibble: 1,704 x 8
+##    country     continent  year lifeExp      pop gdpPercap     grossGDP gdpBill
+##    &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;        &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Afghanistan Asia       1952    28.8  8425333      779.  6567086330.    6.57
+##  2 Afghanistan Asia       1957    30.3  9240934      821.  7585448670.    7.59
+##  3 Afghanistan Asia       1962    32.0 10267083      853.  8758855797.    8.76
+##  4 Afghanistan Asia       1967    34.0 11537966      836.  9648014150.    9.65
+##  5 Afghanistan Asia       1972    36.1 13079460      740.  9678553274.    9.68
+##  6 Afghanistan Asia       1977    38.4 14880372      786. 11697659231.   11.7 
+##  7 Afghanistan Asia       1982    39.9 12881816      978. 12598563401.   12.6 
+##  8 Afghanistan Asia       1987    40.8 13867957      852. 11820990309.   11.8 
+##  9 Afghanistan Asia       1992    41.7 16317921      649. 10595901589.   10.6 
+## 10 Afghanistan Asia       1997    41.8 22227415      635. 14121995875.   14.1 
+## # ... with 1,694 more rows</code></pre>
 <p>Notice the backwards compatibility! No need for loops!</p>
 <p>Try the same thing, but with <code>transmute</code> (drops all other variables).</p>
-<pre class="r"><code>gapminder |&gt;
-  transmute(FILL_THIS_IN)</code></pre>
-<pre><code>## Error: Problem with `mutate()` input `..1`.
-## i `..1 = FILL_THIS_IN`.
-## x object &#39;FILL_THIS_IN&#39; not found</code></pre>
+<pre class="r"><code>gapminder %&gt;% 
+  transmute(grossGDP = gdpPercap * pop,
+         gdpBill = round(grossGDP / 1000000000, 2))</code></pre>
+<pre><code>## # A tibble: 1,704 x 2
+##        grossGDP gdpBill
+##           &lt;dbl&gt;   &lt;dbl&gt;
+##  1  6567086330.    6.57
+##  2  7585448670.    7.59
+##  3  8758855797.    8.76
+##  4  9648014150.    9.65
+##  5  9678553274.    9.68
+##  6 11697659231.   11.7 
+##  7 12598563401.   12.6 
+##  8 11820990309.   11.8 
+##  9 10595901589.   10.6 
+## 10 14121995875.   14.1 
+## # ... with 1,694 more rows</code></pre>
 <p>The <code>if_else</code> function is useful for changing certain elements in a data frame.</p>
 <p>Example: Suppose Canada’s 1952 life expectancy was mistakenly entered as 68.8 in the data frame, but is actually 70. Fix it using <code>if_else</code> and <code>mutate</code>.</p>
-<pre class="r"><code>gapminder |&gt;
-  mutate(FILL_THIS_IN)</code></pre>
-<pre><code>## Error: Problem with `mutate()` input `..1`.
-## i `..1 = FILL_THIS_IN`.
-## x object &#39;FILL_THIS_IN&#39; not found</code></pre>
+<pre class="r"><code>gapminder %&gt;% 
+  mutate(
+    lifeExp = ifelse(country == &#39;Canada&#39; &amp; year == 1952, 70, lifeExp)
+  )</code></pre>
+<pre><code>## # A tibble: 1,704 x 6
+##    country     continent  year lifeExp      pop gdpPercap
+##    &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
+##  1 Afghanistan Asia       1952    28.8  8425333      779.
+##  2 Afghanistan Asia       1957    30.3  9240934      821.
+##  3 Afghanistan Asia       1962    32.0 10267083      853.
+##  4 Afghanistan Asia       1967    34.0 11537966      836.
+##  5 Afghanistan Asia       1972    36.1 13079460      740.
+##  6 Afghanistan Asia       1977    38.4 14880372      786.
+##  7 Afghanistan Asia       1982    39.9 12881816      978.
+##  8 Afghanistan Asia       1987    40.8 13867957      852.
+##  9 Afghanistan Asia       1992    41.7 16317921      649.
+## 10 Afghanistan Asia       1997    41.8 22227415      635.
+## # ... with 1,694 more rows</code></pre>
 <p>Your turn: Make a new column called <code>cc</code> that pastes the country name followed by the continent, separated by a comma. (Hint: use the <code>paste()</code> function with the <code>sep=&quot;, &quot;</code> argument).</p>
 <p>These functions we’ve seen are called <strong>vectorized functions</strong>—they are designed to work with vectors and do their computation on each element of the vector(s).</p>
 </div>
@@ -467,10 +546,9 @@ select(gapminder, Continent = continent)</code></pre>
 <h2><code>across()</code></h2>
 <p>The <code>across()</code> function makes it easier to do <code>mutate()</code> and <code>summarize()</code> on multiple columns at a time. When you use <code>across()</code>, you give either: (1) A <strong>vector</strong> of column names, or (2) A <strong>condition</strong> that columns must match. Then, <code>mutate()</code> or <code>summarize()</code> will be performed for each matching column.</p>
 <p>Let’s use <code>across()</code> to rescale the personality scores in <code>psych::bfi</code> to be on a 0-100 scale instead of a 1-6 scale.</p>
-<pre class="r"><code>psych::bfi |&gt;
-  as_tibble(rownames = &quot;.id&quot;) |&gt; 
-  mutate(across(
-    A1:O5, 
+<pre class="r"><code>psych::bfi %&gt;% 
+  as_tibble(rownames = &quot;.id&quot;) %&gt;%  
+  mutate(across(A1:O5, 
     \(x) (x - min(x, na.rm = TRUE)) / (max(x, na.rm = TRUE) - min(x, na.rm = TRUE)) * 100
   ))</code></pre>
 <pre><code>## # A tibble: 2,800 x 29
@@ -641,10 +719,25 @@ select(gapminder, Continent = continent)</code></pre>
 <li>Add the corresponding country to the tibble, too.</li>
 <li>Arrange by min life expectancy.</li>
 </ol>
-<pre class="r"><code>gapminder |&gt; 
-  group_by(FILL_THIS_IN) |&gt; 
-  FILL_THIS_IN(min_life = min(lifeExp))</code></pre>
-<pre><code>## Error in FILL_THIS_IN(group_by(gapminder, FILL_THIS_IN), min_life = min(lifeExp)): could not find function &quot;FILL_THIS_IN&quot;</code></pre>
+<pre class="r"><code>gapminder %&gt;%  
+  group_by(year) %&gt;%  
+  mutate(meanLifeExp = mean(lifeExp),
+         lifeExp_center = lifeExp - mean(lifeExp, na.rm = TRUE)) %&gt;% 
+  ungroup()</code></pre>
+<pre><code>## # A tibble: 1,704 x 8
+##    country   continent  year lifeExp    pop gdpPercap meanLifeExp lifeExp_center
+##    &lt;fct&gt;     &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;     &lt;dbl&gt;       &lt;dbl&gt;          &lt;dbl&gt;
+##  1 Afghanis~ Asia       1952    28.8 8.43e6      779.        49.1          -20.3
+##  2 Afghanis~ Asia       1957    30.3 9.24e6      821.        51.5          -21.2
+##  3 Afghanis~ Asia       1962    32.0 1.03e7      853.        53.6          -21.6
+##  4 Afghanis~ Asia       1967    34.0 1.15e7      836.        55.7          -21.7
+##  5 Afghanis~ Asia       1972    36.1 1.31e7      740.        57.6          -21.6
+##  6 Afghanis~ Asia       1977    38.4 1.49e7      786.        59.6          -21.1
+##  7 Afghanis~ Asia       1982    39.9 1.29e7      978.        61.5          -21.7
+##  8 Afghanis~ Asia       1987    40.8 1.39e7      852.        63.2          -22.4
+##  9 Afghanis~ Asia       1992    41.7 1.63e7      649.        64.2          -22.5
+## 10 Afghanis~ Asia       1997    41.8 2.22e7      635.        65.0          -23.3
+## # ... with 1,694 more rows</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Let’s compute the mean Agreeableness score across items for each participant in the <code>psych::bfi</code> dataset. Be sure to handle <code>NA</code>!</li>
 </ol>

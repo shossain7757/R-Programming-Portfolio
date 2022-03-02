@@ -23,7 +23,7 @@ lotr  <- read_csv("https://raw.githubusercontent.com/jennybc/lotr-tidy/master/da
 
 
 I would say that the data is in tidy format as each row represents number of people of certain species and gender in one of the trilogies of lord of the rings. The layout of
-the data also machine readable.
+the data is also machine readable.
 
 ### Exercise 2
 
