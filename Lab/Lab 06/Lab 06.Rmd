@@ -14,9 +14,9 @@ library(tidyverse)
 ```
 
 
-## Exercises
+## Exercises 1
 
-### Exercise 1
+### Exercise 1.1
 
 ```{r}
 songs <- read_csv("https://raw.githubusercontent.com/bwiernik/progdata-class/master/data/singer/songs.csv")
@@ -29,5 +29,96 @@ locations <- read_csv("https://raw.githubusercontent.com/bwiernik/progdata-class
    select(title, everything()) |> 
    rename(album = release,
           song  = title))
+```
+
+ The songs for those we know its corresponding album
+ 
+```{r}
+
+time |> 
+  inner_join(album, by = 'song')
+  
+```
+ 
+ 
+### Exercise 1.2
+ 
+ 
+Adding the corresponding albums to the time tibble, even if album info is not readily available. 
+ 
+ 
+```{r}
+
+time |> 
+  left_join(album, by = 'song')
+  
+```
+
+
+### Exercise 1.3
+
+
+The songs for those we do have “year”, but not album info.
+
+
+```{r}
+
+time |> 
+  anti_join(album, by = "song")
+
+
+```
+
+
+### Exercise 1.4
+
+Artists that are in time but not in album.
+
+```{r}
+
+time |> 
+  anti_join(album, by = "artist_name")
+
+```
+
+
+### Exercise 1.5
+
+To make all the info available in one tibble.
+
+
+
+```{r}
+
+time |>
+  full_join(album, by = 'song')
+
+
+```
+
+
+## Exercise 2
+
+
+### Exercise 2.1
+
+Three tibbles of data on the Lord of the Rings:
+
+
+```{r}
+
+fell <- read_csv("https://raw.githubusercontent.com/jennybc/lotr-tidy/master/data/The_Fellowship_Of_The_Ring.csv")
+ttow <- read_csv("https://raw.githubusercontent.com/jennybc/lotr-tidy/master/data/The_Two_Towers.csv")
+retk <- read_csv("https://raw.githubusercontent.com/jennybc/lotr-tidy/master/data/The_Return_Of_The_King.csv")
+
+
+```
+
+
+Stacking into a single tibble.
+
+
+```{r}
+
 ```
 
