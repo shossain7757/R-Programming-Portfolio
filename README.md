@@ -46,5 +46,8 @@ The repository is divided into different folders and subfolders. The "*getting_s
 | Lab 1  |:thumbsup:|
 | Lab 2  |:thumbsup:|
 | Lab 3  |:thumbsup:|
+| Lab 4  |:thumbsup:|
+| Lab 5  |:thumbsup:|
+| Lab 6  |:thumbsup:|
 
 
