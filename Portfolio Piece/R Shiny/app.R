@@ -91,7 +91,7 @@ ui <- fluidPage(theme = shinytheme("flatly"),
   )
 )
 
-# Define server logic required to draw a histogram
+# Define server logic required to draw a barplot
 server <- function(input, output) {
 
     output$barPlotDC <- renderPlot({
