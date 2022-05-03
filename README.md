@@ -33,8 +33,8 @@ The repository is divided into different folders and subfolders. The "*getting_s
 <summary>Portfolio Pieces</summary>
 <ol>
  <li><a href="https://github.com/shossain7757/Lab-07-Make-a-portfolio-piece">Data Analysis Report</a></li>
- <li>Personal Website</li>
- <li>R Shiny</li>
+ <li><a href="https://github.com/shossain7757/progdata-class/tree/main/Portfolio%20Piece/Personal%20Website">Personal Website</a></li>
+ <li><a href="https://github.com/shossain7757/progdata-class/tree/main/Portfolio%20Piece/R%20Shiny">R Shiny</a></li>
 </ol>
 </details>
 
