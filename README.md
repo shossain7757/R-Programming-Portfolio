@@ -51,3 +51,10 @@ The repository is divided into different folders and subfolders. The "*getting_s
 | Lab 6  |:thumbsup:|
 
 
+# Portfolio Piece Completion Status
+
+|**Item**|**Status**|
+|:---:   |:---:     |
+| Lab 7 Data Analysis Activity  |:thumbsup:|
+| Personal Website  |:thumbsup:|
+| R shiny APP  |:thumbsup:|
