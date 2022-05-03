@@ -21,3 +21,8 @@ Variable | Definition
 `APPEARANCES` | The number of appareances of the character in comic books (as of Sep. 2, 2014. Number will become increasingly out of date as time goes on.)
 `FIRST APPEARANCE` | The month and year of the character's first appearance in a comic book, if available
 `YEAR` | The year of the character's first appearance in a comic book, if available
+
+
+# Running the APP
+
+Open *app.R* in R studio and click "Run App" at the top right corner. 
