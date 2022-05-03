@@ -12,6 +12,9 @@ The repository is divided into different folders and subfolders. The "*getting_s
 
 <details>
 <summary> getting_started </summary>
+<ol>
+  <li><a href="https://github.com/shossain7757/progdata-class/tree/main/getting-started">Class Activities</a></li>
+</ol>
 </details>
 
 <details>
@@ -29,15 +32,13 @@ The repository is divided into different folders and subfolders. The "*getting_s
 <details>
 <summary>Portfolio Pieces</summary>
 <ol>
+ <li><a href="https://github.com/shossain7757/Lab-07-Make-a-portfolio-piece"></a>Data Analysis Report
+ </li>
  <li>Personal Website</li>
  <li>R Shiny</li>
 </ol>
 </details>
 
-<details>
-<summary> Presentation </summary>
- - Presentation Slide
-</details>
 
 # Code Completion Status
 
