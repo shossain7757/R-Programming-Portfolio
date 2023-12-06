@@ -1,4 +1,4 @@
-# progdata-class
+# R Porgramming Portfolio
 
 The repository includes all the practice R codes and deliverables for the course PSY4931. The course instructor is *Professor Brenton M. Wiernik*
 
